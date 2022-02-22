@@ -12,7 +12,6 @@ R=()
 P=()
 TOTAL=$(wc -l < wordle.results.txt)
 TOTAL=$(( TOTAL + 0 ))
-FILE=tmp.$$
 
 rm -f wordle.results.hist.txt
 
@@ -22,13 +21,8 @@ do
     percent=$(( count * 100 / TOTAL ))
     R+=( "${count}" )
     P+=( "${percent}" )
-    echo "${count}" >> ${FILE}
     echo "${x} ${count} ${percent}" >> wordle.results.hist.txt
 done
-
-MAX=$(cat ${FILE} | sort -n | tail -1)
-LEN=$(echo ${MAX} | awk '{print length}')
-rm ${FILE}
 
 OUT=wordle.results.hist.ascii.txt
 rm -f ${OUT}
